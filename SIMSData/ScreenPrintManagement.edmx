@@ -1,0 +1,1071 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ScreenPrintManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ContactAddress">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Address1" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address2" Type="varchar" MaxLength="50" />
+          <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="Zip" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdatedBy" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ContactPerson">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdatedBy" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ContactPersonAddress">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContactPersonId" Type="int" Nullable="false" />
+          <Property Name="ContactAddressId" Type="int" Nullable="false" />
+          <Property Name="ContactAddressTypeId" Type="int" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdatedBy" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ContactPersonPhone">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContactPersonId" Type="int" Nullable="false" />
+          <Property Name="ContactPhoneNumberId" Type="int" Nullable="false" />
+          <Property Name="ContactPhoneTypeId" Type="int" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdatedBy" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ContactPhoneNumber">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="PhoneNumberTypeId" Type="int" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdatedBy" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AccountNumber" Type="varchar" MaxLength="50" />
+          <Property Name="SalesPersonUserId" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdatedBy" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CustomerContact">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="ContactPersonId" Type="int" Nullable="false" />
+          <Property Name="CustomerContactPersonTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Lookup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LookupTypeId" Type="int" Nullable="false" />
+          <Property Name="Value" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdatedBy" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LookupType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeDescription" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdatedBy" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Permissions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Permission" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PermissionModuleKey" Type="int" Nullable="false" />
+          <Property Name="CanAccess" Type="bit" Nullable="false" />
+          <Property Name="CanUpdate" Type="bit" Nullable="false" />
+          <Property Name="CanDelete" Type="bit" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdatedBy" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="PermissionId" Type="int" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdatedBy" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdatedBy" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ContactNumber" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdatedBy" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ContactPersonAddress_ContactAddress">
+          <End Role="ContactAddress" Type="Self.ContactAddress" Multiplicity="1" />
+          <End Role="ContactPersonAddress" Type="Self.ContactPersonAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactAddress">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactPersonAddress">
+              <PropertyRef Name="ContactAddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactPersonAddress_ContactPerson">
+          <End Role="ContactPerson" Type="Self.ContactPerson" Multiplicity="1" />
+          <End Role="ContactPersonAddress" Type="Self.ContactPersonAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactPerson">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactPersonAddress">
+              <PropertyRef Name="ContactPersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactPersonAddress_Lookup">
+          <End Role="Lookup" Type="Self.Lookup" Multiplicity="1" />
+          <End Role="ContactPersonAddress" Type="Self.ContactPersonAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lookup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactPersonAddress">
+              <PropertyRef Name="ContactAddressTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactPersonPhone_ContactPerson">
+          <End Role="ContactPerson" Type="Self.ContactPerson" Multiplicity="1" />
+          <End Role="ContactPersonPhone" Type="Self.ContactPersonPhone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactPerson">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactPersonPhone">
+              <PropertyRef Name="ContactPersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactPersonPhone_ContactPhoneNumber">
+          <End Role="ContactPhoneNumber" Type="Self.ContactPhoneNumber" Multiplicity="1" />
+          <End Role="ContactPersonPhone" Type="Self.ContactPersonPhone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactPhoneNumber">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactPersonPhone">
+              <PropertyRef Name="ContactPhoneNumberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactPersonPhone_Lookup">
+          <End Role="Lookup" Type="Self.Lookup" Multiplicity="1" />
+          <End Role="ContactPersonPhone" Type="Self.ContactPersonPhone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lookup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactPersonPhone">
+              <PropertyRef Name="ContactPhoneTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactPhoneNumber_Lookup">
+          <End Role="Lookup" Type="Self.Lookup" Multiplicity="1" />
+          <End Role="ContactPhoneNumber" Type="Self.ContactPhoneNumber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lookup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactPhoneNumber">
+              <PropertyRef Name="PhoneNumberTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerContact_ContactPerson">
+          <End Role="ContactPerson" Type="Self.ContactPerson" Multiplicity="1" />
+          <End Role="CustomerContact" Type="Self.CustomerContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactPerson">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CustomerContact">
+              <PropertyRef Name="ContactPersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerContact_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="CustomerContact" Type="Self.CustomerContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CustomerContact">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerContact_LookupType">
+          <End Role="LookupType" Type="Self.LookupType" Multiplicity="1" />
+          <End Role="CustomerContact" Type="Self.CustomerContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LookupType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CustomerContact">
+              <PropertyRef Name="CustomerContactPersonTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lookups_LookupTypes">
+          <End Role="LookupType" Type="Self.LookupType" Multiplicity="1" />
+          <End Role="Lookup" Type="Self.Lookup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LookupType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Lookup">
+              <PropertyRef Name="LookupTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Roles_Permissions">
+          <End Role="Permissions" Type="Self.Permissions" Multiplicity="1" />
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Permissions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Roles">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRoles_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRoles_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ScreenPrintManagementModelStoreContainer">
+          <EntitySet Name="ContactAddress" EntityType="Self.ContactAddress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContactPerson" EntityType="Self.ContactPerson" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContactPersonAddress" EntityType="Self.ContactPersonAddress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContactPersonPhone" EntityType="Self.ContactPersonPhone" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContactPhoneNumber" EntityType="Self.ContactPhoneNumber" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerContact" EntityType="Self.CustomerContact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lookup" EntityType="Self.Lookup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LookupType" EntityType="Self.LookupType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Permissions" EntityType="Self.Permissions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ContactPersonAddress_ContactAddress" Association="Self.FK_ContactPersonAddress_ContactAddress">
+            <End Role="ContactAddress" EntitySet="ContactAddress" />
+            <End Role="ContactPersonAddress" EntitySet="ContactPersonAddress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactPersonAddress_ContactPerson" Association="Self.FK_ContactPersonAddress_ContactPerson">
+            <End Role="ContactPerson" EntitySet="ContactPerson" />
+            <End Role="ContactPersonAddress" EntitySet="ContactPersonAddress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactPersonAddress_Lookup" Association="Self.FK_ContactPersonAddress_Lookup">
+            <End Role="Lookup" EntitySet="Lookup" />
+            <End Role="ContactPersonAddress" EntitySet="ContactPersonAddress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactPersonPhone_ContactPerson" Association="Self.FK_ContactPersonPhone_ContactPerson">
+            <End Role="ContactPerson" EntitySet="ContactPerson" />
+            <End Role="ContactPersonPhone" EntitySet="ContactPersonPhone" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactPersonPhone_ContactPhoneNumber" Association="Self.FK_ContactPersonPhone_ContactPhoneNumber">
+            <End Role="ContactPhoneNumber" EntitySet="ContactPhoneNumber" />
+            <End Role="ContactPersonPhone" EntitySet="ContactPersonPhone" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactPersonPhone_Lookup" Association="Self.FK_ContactPersonPhone_Lookup">
+            <End Role="Lookup" EntitySet="Lookup" />
+            <End Role="ContactPersonPhone" EntitySet="ContactPersonPhone" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactPhoneNumber_Lookup" Association="Self.FK_ContactPhoneNumber_Lookup">
+            <End Role="Lookup" EntitySet="Lookup" />
+            <End Role="ContactPhoneNumber" EntitySet="ContactPhoneNumber" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerContact_ContactPerson" Association="Self.FK_CustomerContact_ContactPerson">
+            <End Role="ContactPerson" EntitySet="ContactPerson" />
+            <End Role="CustomerContact" EntitySet="CustomerContact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerContact_Customer" Association="Self.FK_CustomerContact_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="CustomerContact" EntitySet="CustomerContact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerContact_LookupType" Association="Self.FK_CustomerContact_LookupType">
+            <End Role="LookupType" EntitySet="LookupType" />
+            <End Role="CustomerContact" EntitySet="CustomerContact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lookups_LookupTypes" Association="Self.FK_Lookups_LookupTypes">
+            <End Role="LookupType" EntitySet="LookupType" />
+            <End Role="Lookup" EntitySet="Lookup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Roles_Permissions" Association="Self.FK_Roles_Permissions">
+            <End Role="Permissions" EntitySet="Permissions" />
+            <End Role="Roles" EntitySet="Roles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRoles_Roles" Association="Self.FK_UserRoles_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRoles_Users" Association="Self.FK_UserRoles_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ScreenPrintManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ContactAddress">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Address1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="State" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Zip" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ContactPersonAddresses" Relationship="Self.FK_ContactPersonAddress_ContactAddress" FromRole="ContactAddress" ToRole="ContactPersonAddress" />
+        </EntityType>
+        <EntityType Name="ContactPerson">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ContactPersonAddresses" Relationship="Self.FK_ContactPersonAddress_ContactPerson" FromRole="ContactPerson" ToRole="ContactPersonAddress" />
+          <NavigationProperty Name="ContactPersonPhones" Relationship="Self.FK_ContactPersonPhone_ContactPerson" FromRole="ContactPerson" ToRole="ContactPersonPhone" />
+          <NavigationProperty Name="CustomerContacts" Relationship="Self.FK_CustomerContact_ContactPerson" FromRole="ContactPerson" ToRole="CustomerContact" />
+        </EntityType>
+        <EntityType Name="ContactPersonAddress">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContactPersonId" Type="Int32" Nullable="false" />
+          <Property Name="ContactAddressId" Type="Int32" Nullable="false" />
+          <Property Name="ContactAddressTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ContactAddress" Relationship="Self.FK_ContactPersonAddress_ContactAddress" FromRole="ContactPersonAddress" ToRole="ContactAddress" />
+          <NavigationProperty Name="ContactPerson" Relationship="Self.FK_ContactPersonAddress_ContactPerson" FromRole="ContactPersonAddress" ToRole="ContactPerson" />
+          <NavigationProperty Name="Lookup" Relationship="Self.FK_ContactPersonAddress_Lookup" FromRole="ContactPersonAddress" ToRole="Lookup" />
+        </EntityType>
+        <EntityType Name="ContactPersonPhone">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContactPersonId" Type="Int32" Nullable="false" />
+          <Property Name="ContactPhoneNumberId" Type="Int32" Nullable="false" />
+          <Property Name="ContactPhoneTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ContactPerson" Relationship="Self.FK_ContactPersonPhone_ContactPerson" FromRole="ContactPersonPhone" ToRole="ContactPerson" />
+          <NavigationProperty Name="ContactPhoneNumber" Relationship="Self.FK_ContactPersonPhone_ContactPhoneNumber" FromRole="ContactPersonPhone" ToRole="ContactPhoneNumber" />
+          <NavigationProperty Name="Lookup" Relationship="Self.FK_ContactPersonPhone_Lookup" FromRole="ContactPersonPhone" ToRole="Lookup" />
+        </EntityType>
+        <EntityType Name="ContactPhoneNumber">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhoneNumberTypeId" Type="Int32" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ContactPersonPhones" Relationship="Self.FK_ContactPersonPhone_ContactPhoneNumber" FromRole="ContactPhoneNumber" ToRole="ContactPersonPhone" />
+          <NavigationProperty Name="Lookup" Relationship="Self.FK_ContactPhoneNumber_Lookup" FromRole="ContactPhoneNumber" ToRole="Lookup" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AccountNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SalesPersonUserId" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CustomerContacts" Relationship="Self.FK_CustomerContact_Customer" FromRole="Customer" ToRole="CustomerContact" />
+        </EntityType>
+        <EntityType Name="CustomerContact">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="ContactPersonId" Type="Int32" Nullable="false" />
+          <Property Name="CustomerContactPersonTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ContactPerson" Relationship="Self.FK_CustomerContact_ContactPerson" FromRole="CustomerContact" ToRole="ContactPerson" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_CustomerContact_Customer" FromRole="CustomerContact" ToRole="Customer" />
+          <NavigationProperty Name="LookupType" Relationship="Self.FK_CustomerContact_LookupType" FromRole="CustomerContact" ToRole="LookupType" />
+        </EntityType>
+        <EntityType Name="Lookup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LookupTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ContactPersonAddresses" Relationship="Self.FK_ContactPersonAddress_Lookup" FromRole="Lookup" ToRole="ContactPersonAddress" />
+          <NavigationProperty Name="ContactPersonPhones" Relationship="Self.FK_ContactPersonPhone_Lookup" FromRole="Lookup" ToRole="ContactPersonPhone" />
+          <NavigationProperty Name="ContactPhoneNumbers" Relationship="Self.FK_ContactPhoneNumber_Lookup" FromRole="Lookup" ToRole="ContactPhoneNumber" />
+          <NavigationProperty Name="LookupType" Relationship="Self.FK_Lookups_LookupTypes" FromRole="Lookup" ToRole="LookupType" />
+        </EntityType>
+        <EntityType Name="LookupType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CustomerContacts" Relationship="Self.FK_CustomerContact_LookupType" FromRole="LookupType" ToRole="CustomerContact" />
+          <NavigationProperty Name="Lookups" Relationship="Self.FK_Lookups_LookupTypes" FromRole="LookupType" ToRole="Lookup" />
+        </EntityType>
+        <EntityType Name="Permission">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Permission1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PermissionModuleKey" Type="Int32" Nullable="false" />
+          <Property Name="CanAccess" Type="Boolean" Nullable="false" />
+          <Property Name="CanUpdate" Type="Boolean" Nullable="false" />
+          <Property Name="CanDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_Roles_Permissions" FromRole="Permissions" ToRole="Roles" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PermissionId" Type="Int32" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Permission" Relationship="Self.FK_Roles_Permissions" FromRole="Roles" ToRole="Permissions" />
+          <NavigationProperty Name="UserRole" Relationship="Self.FK_UserRoles_Roles" FromRole="Roles" ToRole="UserRoles" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_UserRoles_Roles" FromRole="UserRoles" ToRole="Roles" />
+          <NavigationProperty Name="User" Relationship="Self.FK_UserRoles_Users" FromRole="UserRoles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ContactNumber" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="UserRole" Relationship="Self.FK_UserRoles_Users" FromRole="Users" ToRole="UserRoles" />
+        </EntityType>
+        <Association Name="FK_ContactPersonAddress_ContactAddress">
+          <End Role="ContactAddress" Type="Self.ContactAddress" Multiplicity="1" />
+          <End Role="ContactPersonAddress" Type="Self.ContactPersonAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactAddress">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactPersonAddress">
+              <PropertyRef Name="ContactAddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactPersonAddress_ContactPerson">
+          <End Role="ContactPerson" Type="Self.ContactPerson" Multiplicity="1" />
+          <End Role="ContactPersonAddress" Type="Self.ContactPersonAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactPerson">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactPersonAddress">
+              <PropertyRef Name="ContactPersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactPersonPhone_ContactPerson">
+          <End Role="ContactPerson" Type="Self.ContactPerson" Multiplicity="1" />
+          <End Role="ContactPersonPhone" Type="Self.ContactPersonPhone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactPerson">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactPersonPhone">
+              <PropertyRef Name="ContactPersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerContact_ContactPerson">
+          <End Role="ContactPerson" Type="Self.ContactPerson" Multiplicity="1" />
+          <End Role="CustomerContact" Type="Self.CustomerContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactPerson">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CustomerContact">
+              <PropertyRef Name="ContactPersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactPersonAddress_Lookup">
+          <End Role="Lookup" Type="Self.Lookup" Multiplicity="1" />
+          <End Role="ContactPersonAddress" Type="Self.ContactPersonAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lookup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactPersonAddress">
+              <PropertyRef Name="ContactAddressTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactPersonPhone_ContactPhoneNumber">
+          <End Role="ContactPhoneNumber" Type="Self.ContactPhoneNumber" Multiplicity="1" />
+          <End Role="ContactPersonPhone" Type="Self.ContactPersonPhone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactPhoneNumber">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactPersonPhone">
+              <PropertyRef Name="ContactPhoneNumberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactPersonPhone_Lookup">
+          <End Role="Lookup" Type="Self.Lookup" Multiplicity="1" />
+          <End Role="ContactPersonPhone" Type="Self.ContactPersonPhone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lookup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactPersonPhone">
+              <PropertyRef Name="ContactPhoneTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactPhoneNumber_Lookup">
+          <End Role="Lookup" Type="Self.Lookup" Multiplicity="1" />
+          <End Role="ContactPhoneNumber" Type="Self.ContactPhoneNumber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lookup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactPhoneNumber">
+              <PropertyRef Name="PhoneNumberTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerContact_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="CustomerContact" Type="Self.CustomerContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CustomerContact">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerContact_LookupType">
+          <End Role="LookupType" Type="Self.LookupType" Multiplicity="1" />
+          <End Role="CustomerContact" Type="Self.CustomerContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LookupType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CustomerContact">
+              <PropertyRef Name="CustomerContactPersonTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lookups_LookupTypes">
+          <End Role="LookupType" Type="Self.LookupType" Multiplicity="1" />
+          <End Role="Lookup" Type="Self.Lookup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LookupType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Lookup">
+              <PropertyRef Name="LookupTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Roles_Permissions">
+          <End Role="Permissions" Type="Self.Permission" Multiplicity="1" />
+          <End Role="Roles" Type="Self.Role" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Permissions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Roles">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRoles_Roles">
+          <End Role="Roles" Type="Self.Role" Multiplicity="1" />
+          <End Role="UserRoles" Type="Self.UserRole" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRoles_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="UserRoles" Type="Self.UserRole" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ScreenPrintManagementEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ContactAddresses" EntityType="Self.ContactAddress" />
+          <EntitySet Name="ContactPersons" EntityType="Self.ContactPerson" />
+          <EntitySet Name="ContactPersonAddresses" EntityType="Self.ContactPersonAddress" />
+          <EntitySet Name="ContactPersonPhones" EntityType="Self.ContactPersonPhone" />
+          <EntitySet Name="ContactPhoneNumbers" EntityType="Self.ContactPhoneNumber" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="CustomerContacts" EntityType="Self.CustomerContact" />
+          <EntitySet Name="Lookups" EntityType="Self.Lookup" />
+          <EntitySet Name="LookupTypes" EntityType="Self.LookupType" />
+          <EntitySet Name="Permissions" EntityType="Self.Permission" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_ContactPersonAddress_ContactAddress" Association="Self.FK_ContactPersonAddress_ContactAddress">
+            <End Role="ContactAddress" EntitySet="ContactAddresses" />
+            <End Role="ContactPersonAddress" EntitySet="ContactPersonAddresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactPersonAddress_ContactPerson" Association="Self.FK_ContactPersonAddress_ContactPerson">
+            <End Role="ContactPerson" EntitySet="ContactPersons" />
+            <End Role="ContactPersonAddress" EntitySet="ContactPersonAddresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactPersonPhone_ContactPerson" Association="Self.FK_ContactPersonPhone_ContactPerson">
+            <End Role="ContactPerson" EntitySet="ContactPersons" />
+            <End Role="ContactPersonPhone" EntitySet="ContactPersonPhones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerContact_ContactPerson" Association="Self.FK_CustomerContact_ContactPerson">
+            <End Role="ContactPerson" EntitySet="ContactPersons" />
+            <End Role="CustomerContact" EntitySet="CustomerContacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactPersonAddress_Lookup" Association="Self.FK_ContactPersonAddress_Lookup">
+            <End Role="Lookup" EntitySet="Lookups" />
+            <End Role="ContactPersonAddress" EntitySet="ContactPersonAddresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactPersonPhone_ContactPhoneNumber" Association="Self.FK_ContactPersonPhone_ContactPhoneNumber">
+            <End Role="ContactPhoneNumber" EntitySet="ContactPhoneNumbers" />
+            <End Role="ContactPersonPhone" EntitySet="ContactPersonPhones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactPersonPhone_Lookup" Association="Self.FK_ContactPersonPhone_Lookup">
+            <End Role="Lookup" EntitySet="Lookups" />
+            <End Role="ContactPersonPhone" EntitySet="ContactPersonPhones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactPhoneNumber_Lookup" Association="Self.FK_ContactPhoneNumber_Lookup">
+            <End Role="Lookup" EntitySet="Lookups" />
+            <End Role="ContactPhoneNumber" EntitySet="ContactPhoneNumbers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerContact_Customer" Association="Self.FK_CustomerContact_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="CustomerContact" EntitySet="CustomerContacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerContact_LookupType" Association="Self.FK_CustomerContact_LookupType">
+            <End Role="LookupType" EntitySet="LookupTypes" />
+            <End Role="CustomerContact" EntitySet="CustomerContacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lookups_LookupTypes" Association="Self.FK_Lookups_LookupTypes">
+            <End Role="LookupType" EntitySet="LookupTypes" />
+            <End Role="Lookup" EntitySet="Lookups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Roles_Permissions" Association="Self.FK_Roles_Permissions">
+            <End Role="Permissions" EntitySet="Permissions" />
+            <End Role="Roles" EntitySet="Roles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRoles_Roles" Association="Self.FK_UserRoles_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRoles_Users" Association="Self.FK_UserRoles_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ScreenPrintManagementModelStoreContainer" CdmEntityContainer="ScreenPrintManagementEntities">
+          <EntitySetMapping Name="ContactAddresses">
+            <EntityTypeMapping TypeName="ScreenPrintManagementModel.ContactAddress">
+              <MappingFragment StoreEntitySet="ContactAddress">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContactPersons">
+            <EntityTypeMapping TypeName="ScreenPrintManagementModel.ContactPerson">
+              <MappingFragment StoreEntitySet="ContactPerson">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContactPersonAddresses">
+            <EntityTypeMapping TypeName="ScreenPrintManagementModel.ContactPersonAddress">
+              <MappingFragment StoreEntitySet="ContactPersonAddress">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ContactPersonId" ColumnName="ContactPersonId" />
+                <ScalarProperty Name="ContactAddressId" ColumnName="ContactAddressId" />
+                <ScalarProperty Name="ContactAddressTypeId" ColumnName="ContactAddressTypeId" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContactPersonPhones">
+            <EntityTypeMapping TypeName="ScreenPrintManagementModel.ContactPersonPhone">
+              <MappingFragment StoreEntitySet="ContactPersonPhone">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ContactPersonId" ColumnName="ContactPersonId" />
+                <ScalarProperty Name="ContactPhoneNumberId" ColumnName="ContactPhoneNumberId" />
+                <ScalarProperty Name="ContactPhoneTypeId" ColumnName="ContactPhoneTypeId" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContactPhoneNumbers">
+            <EntityTypeMapping TypeName="ScreenPrintManagementModel.ContactPhoneNumber">
+              <MappingFragment StoreEntitySet="ContactPhoneNumber">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PhoneNumberTypeId" ColumnName="PhoneNumberTypeId" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="ScreenPrintManagementModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="SalesPersonUserId" ColumnName="SalesPersonUserId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerContacts">
+            <EntityTypeMapping TypeName="ScreenPrintManagementModel.CustomerContact">
+              <MappingFragment StoreEntitySet="CustomerContact">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="ContactPersonId" ColumnName="ContactPersonId" />
+                <ScalarProperty Name="CustomerContactPersonTypeId" ColumnName="CustomerContactPersonTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lookups">
+            <EntityTypeMapping TypeName="ScreenPrintManagementModel.Lookup">
+              <MappingFragment StoreEntitySet="Lookup">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LookupTypeId" ColumnName="LookupTypeId" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LookupTypes">
+            <EntityTypeMapping TypeName="ScreenPrintManagementModel.LookupType">
+              <MappingFragment StoreEntitySet="LookupType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TypeDescription" ColumnName="TypeDescription" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Permissions">
+            <EntityTypeMapping TypeName="ScreenPrintManagementModel.Permission">
+              <MappingFragment StoreEntitySet="Permissions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Permission1" ColumnName="Permission" />
+                <ScalarProperty Name="PermissionModuleKey" ColumnName="PermissionModuleKey" />
+                <ScalarProperty Name="CanAccess" ColumnName="CanAccess" />
+                <ScalarProperty Name="CanUpdate" ColumnName="CanUpdate" />
+                <ScalarProperty Name="CanDelete" ColumnName="CanDelete" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="ScreenPrintManagementModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Role1" ColumnName="Role" />
+                <ScalarProperty Name="PermissionId" ColumnName="PermissionId" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="ScreenPrintManagementModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ScreenPrintManagementModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

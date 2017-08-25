@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8945803b1adc43479c5399ed3170dc63" Name="Diagram1">
+        <EntityTypeShape EntityType="ScreenPrintManagementModel.ContactAddress" Width="1.5" PointX="3" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ScreenPrintManagementModel.ContactPerson" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ScreenPrintManagementModel.ContactPersonAddress" Width="1.5" PointX="5.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="ScreenPrintManagementModel.ContactPersonPhone" Width="1.5" PointX="7.5" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ScreenPrintManagementModel.ContactPhoneNumber" Width="1.5" PointX="5.25" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ScreenPrintManagementModel.Customer" Width="1.5" PointX="0.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="ScreenPrintManagementModel.CustomerContact" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ScreenPrintManagementModel.Lookup" Width="1.5" PointX="3" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="ScreenPrintManagementModel.LookupType" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="ScreenPrintManagementModel.Permission" Width="1.5" PointX="2.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ScreenPrintManagementModel.Role" Width="1.5" PointX="5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ScreenPrintManagementModel.UserRole" Width="1.5" PointX="7.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ScreenPrintManagementModel.User" Width="1.5" PointX="5" PointY="22" IsExpanded="true" />
+        <AssociationConnector Association="ScreenPrintManagementModel.FK_ContactPersonAddress_ContactAddress" ManuallyRouted="false" />
+        <AssociationConnector Association="ScreenPrintManagementModel.FK_ContactPersonAddress_ContactPerson" ManuallyRouted="false" />
+        <AssociationConnector Association="ScreenPrintManagementModel.FK_ContactPersonPhone_ContactPerson" ManuallyRouted="false" />
+        <AssociationConnector Association="ScreenPrintManagementModel.FK_CustomerContact_ContactPerson" ManuallyRouted="false" />
+        <AssociationConnector Association="ScreenPrintManagementModel.FK_ContactPersonAddress_Lookup" ManuallyRouted="false" />
+        <AssociationConnector Association="ScreenPrintManagementModel.FK_ContactPersonPhone_ContactPhoneNumber" ManuallyRouted="false" />
+        <AssociationConnector Association="ScreenPrintManagementModel.FK_ContactPersonPhone_Lookup" ManuallyRouted="false" />
+        <AssociationConnector Association="ScreenPrintManagementModel.FK_ContactPhoneNumber_Lookup" ManuallyRouted="false" />
+        <AssociationConnector Association="ScreenPrintManagementModel.FK_CustomerContact_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="ScreenPrintManagementModel.FK_CustomerContact_LookupType" ManuallyRouted="false" />
+        <AssociationConnector Association="ScreenPrintManagementModel.FK_Lookups_LookupTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="ScreenPrintManagementModel.FK_Roles_Permissions" ManuallyRouted="false" />
+        <AssociationConnector Association="ScreenPrintManagementModel.FK_UserRoles_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="ScreenPrintManagementModel.FK_UserRoles_Users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

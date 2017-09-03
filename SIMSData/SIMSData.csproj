@@ -52,86 +52,86 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContactAddress.cs">
-      <DependentUpon>ScreenPrintManagement.tt</DependentUpon>
+      <DependentUpon>ScreenPrintManagementEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ContactPerson.cs">
-      <DependentUpon>ScreenPrintManagement.tt</DependentUpon>
+      <DependentUpon>ScreenPrintManagementEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ContactPersonAddress.cs">
-      <DependentUpon>ScreenPrintManagement.tt</DependentUpon>
+      <DependentUpon>ScreenPrintManagementEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ContactPersonPhone.cs">
-      <DependentUpon>ScreenPrintManagement.tt</DependentUpon>
+      <DependentUpon>ScreenPrintManagementEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ContactPhoneNumber.cs">
-      <DependentUpon>ScreenPrintManagement.tt</DependentUpon>
+      <DependentUpon>ScreenPrintManagementEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Customer.cs">
-      <DependentUpon>ScreenPrintManagement.tt</DependentUpon>
+      <DependentUpon>ScreenPrintManagementEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="CustomerContact.cs">
-      <DependentUpon>ScreenPrintManagement.tt</DependentUpon>
+      <DependentUpon>ScreenPrintManagementEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Lookup.cs">
-      <DependentUpon>ScreenPrintManagement.tt</DependentUpon>
+      <DependentUpon>ScreenPrintManagementEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="LookupType.cs">
-      <DependentUpon>ScreenPrintManagement.tt</DependentUpon>
+      <DependentUpon>ScreenPrintManagementEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Permission.cs">
-      <DependentUpon>ScreenPrintManagement.tt</DependentUpon>
+      <DependentUpon>ScreenPrintManagementEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Role.cs">
-      <DependentUpon>ScreenPrintManagement.tt</DependentUpon>
+      <DependentUpon>ScreenPrintManagementEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="ScreenPrintManagement.Context.cs">
+    <Compile Include="ScreenPrintManagementEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ScreenPrintManagement.Context.tt</DependentUpon>
+      <DependentUpon>ScreenPrintManagementEntities.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="ScreenPrintManagement.cs">
+    <Compile Include="ScreenPrintManagementEntities.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ScreenPrintManagement.tt</DependentUpon>
+      <DependentUpon>ScreenPrintManagementEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="ScreenPrintManagement.Designer.cs">
+    <Compile Include="ScreenPrintManagementEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ScreenPrintManagement.edmx</DependentUpon>
+      <DependentUpon>ScreenPrintManagementEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
-      <DependentUpon>ScreenPrintManagement.tt</DependentUpon>
+      <DependentUpon>ScreenPrintManagementEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="UserRole.cs">
-      <DependentUpon>ScreenPrintManagement.tt</DependentUpon>
+      <DependentUpon>ScreenPrintManagementEntities.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <EntityDeploy Include="ScreenPrintManagement.edmx">
+    <EntityDeploy Include="ScreenPrintManagementEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ScreenPrintManagement.Designer.cs</LastGenOutput>
+      <LastGenOutput>ScreenPrintManagementEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="ScreenPrintManagement.edmx.diagram">
-      <DependentUpon>ScreenPrintManagement.edmx</DependentUpon>
+    <None Include="ScreenPrintManagementEntities.edmx.diagram">
+      <DependentUpon>ScreenPrintManagementEntities.edmx</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ScreenPrintManagement.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ScreenPrintManagement.edmx</DependentUpon>
-      <LastGenOutput>ScreenPrintManagement.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="ScreenPrintManagement.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ScreenPrintManagement.edmx</DependentUpon>
-      <LastGenOutput>ScreenPrintManagement.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Content Include="ScreenPrintManagementEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ScreenPrintManagementEntities.edmx</DependentUpon>
+      <LastGenOutput>ScreenPrintManagementEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ScreenPrintManagementEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ScreenPrintManagementEntities.edmx</DependentUpon>
+      <LastGenOutput>ScreenPrintManagementEntities.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

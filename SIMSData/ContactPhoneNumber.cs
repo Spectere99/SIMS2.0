@@ -24,6 +24,7 @@ namespace SIMSData
         public string Name { get; set; }
         public int PhoneNumberTypeId { get; set; }
         public string PhoneNumber { get; set; }
+        public bool IsActive { get; set; }
         public System.DateTime Created { get; set; }
         public string CreatedBy { get; set; }
         public System.DateTime LastUpdated { get; set; }

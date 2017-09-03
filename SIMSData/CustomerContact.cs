@@ -16,11 +16,13 @@ namespace SIMSData
     {
         public int Id { get; set; }
         public int CustomerId { get; set; }
+        public bool IsActive { get; set; }
         public int ContactPersonId { get; set; }
         public int CustomerContactPersonTypeId { get; set; }
     
         public virtual ContactPerson ContactPerson { get; set; }
         public virtual Customer Customer { get; set; }
         public virtual LookupType LookupType { get; set; }
+        public virtual Lookup Lookup { get; set; }
     }
 }

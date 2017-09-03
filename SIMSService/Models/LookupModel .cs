@@ -14,6 +14,8 @@ namespace SIMSService.Models
         public string Value { get; set; }
         [JsonProperty("lookupTypeId")]
         public int LookupTypeId { get; set; }
+        [JsonProperty("isActive")]
+        public bool IsActive { get; set; }
         [JsonProperty("lookupType")]
         public LookupTypeModel LookupType { get; set; }
     }

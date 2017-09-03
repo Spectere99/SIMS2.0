@@ -20,11 +20,13 @@ namespace SIMSData
             this.ContactPersonAddresses = new HashSet<ContactPersonAddress>();
             this.ContactPersonPhones = new HashSet<ContactPersonPhone>();
             this.ContactPhoneNumbers = new HashSet<ContactPhoneNumber>();
+            this.CustomerContacts = new HashSet<CustomerContact>();
         }
     
         public int Id { get; set; }
         public int LookupTypeId { get; set; }
         public string Value { get; set; }
+        public bool IsActive { get; set; }
         public System.DateTime Created { get; set; }
         public string CreatedBy { get; set; }
         public System.DateTime LastUpdated { get; set; }
@@ -37,5 +39,7 @@ namespace SIMSData
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ContactPhoneNumber> ContactPhoneNumbers { get; set; }
         public virtual LookupType LookupType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CustomerContact> CustomerContacts { get; set; }
     }
 }

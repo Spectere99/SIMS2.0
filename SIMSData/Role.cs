@@ -14,9 +14,16 @@ namespace SIMSData
     
     public partial class Role
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Role()
+        {
+            this.UserRoles = new HashSet<UserRole>();
+        }
+    
         public int Id { get; set; }
         public string Role1 { get; set; }
         public int PermissionId { get; set; }
+        public bool IsActive { get; set; }
         public System.DateTime Created { get; set; }
         public string CreatedBy { get; set; }
         public System.DateTime LastUpdated { get; set; }
@@ -24,5 +31,8 @@ namespace SIMSData
     
         public virtual Permission Permission { get; set; }
         public virtual UserRole UserRole { get; set; }
+        public virtual Permission Permission1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserRole> UserRoles { get; set; }
     }
 }

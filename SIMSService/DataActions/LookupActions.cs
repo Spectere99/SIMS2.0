@@ -16,36 +16,12 @@ namespace SIMSService.DataActions
             
         }
 
-        public IEnumerable<LookupTypeModel> GetLookupTypes()
+        public IEnumerable<LookupModel> Get(bool showInactive)
         {
             try
             {
-                var lookupTypes = _dbContext.LookupTypes.ToList();
-                var lookupTypeModels = lookupTypes.Select(lookupType => new LookupTypeModel
-                {
-                    Id = lookupType.Id,
-                    TypeDescription = lookupType.TypeDescription
-                }).ToList();
-
-                return lookupTypeModels;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                _dbContext.Dispose();
-            }
-            
-        }
-
-        public IEnumerable<LookupModel> GetLookups()
-        {
-            try
-            {
-                var lookups = _dbContext.Lookups.ToList();
+                var lookups = showInactive ? _dbContext.Lookups.ToList() :
+                                                 _dbContext.Lookups.Where(p => p.IsActive).ToList();
                 var lookupModels = lookups.Select(lookup => new LookupModel
                 {
                     Id = lookup.Id,
@@ -53,9 +29,11 @@ namespace SIMSService.DataActions
                     LookupType = new LookupTypeModel
                     {
                         Id = lookup.LookupType.Id,
-                        TypeDescription = lookup.LookupType.TypeDescription
+                        TypeDescription = lookup.LookupType.TypeDescription,
+                        IsActive = lookup.LookupType.IsActive
                     },
-                    LookupTypeId = lookup.LookupTypeId
+                    LookupTypeId = lookup.LookupTypeId,
+                    IsActive = lookup.IsActive
                 }).ToList();
 
                 return lookupModels;
@@ -70,6 +48,82 @@ namespace SIMSService.DataActions
                 _dbContext.Dispose();
             }
             
+        }
+        public LookupModel GetById(int id)
+        {
+            try
+            {
+                var lookup = _dbContext.Lookups.Find(id);
+                var lookupModel = new LookupModel
+                {
+                    Id = lookup.Id,
+                    Value = lookup.Value,
+                    LookupTypeId = lookup.LookupTypeId,
+                    LookupType = new LookupTypeModel()
+                    {
+                        Id = lookup.LookupType.Id,
+                        TypeDescription = lookup.LookupType.TypeDescription
+                    }
+                    
+                };
+
+                return lookupModel;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _dbContext.Dispose();
+            }
+        }
+        public void Insert(LookupModel lookupModel, string user)
+        {
+            Lookup lookup = new Lookup
+            {
+                Id = 0,
+                Value = lookupModel.Value,
+                LookupTypeId = lookupModel.LookupTypeId,
+                IsActive = lookupModel.IsActive,
+                Created = DateTime.Now,
+                CreatedBy = user,
+                LastUpdated = DateTime.Now,
+                LastUpdatedBy = user
+            };
+
+            _dbContext.Lookups.Add(lookup);
+            _dbContext.SaveChanges();
+        }
+        public void Update(LookupModel lookupModel, string user)
+        {
+            Lookup lookup = _dbContext.Lookups.Find(lookupModel.Id);
+            if (lookup == null)
+            {
+                return;
+            }
+
+            lookup.Value = lookupModel.Value;
+            lookup.LookupTypeId = lookupModel.LookupTypeId;
+            lookup.IsActive = lookupModel.IsActive;
+            lookup.LastUpdated = DateTime.Now;
+            lookup.LastUpdatedBy = user;
+            _dbContext.SaveChanges();
+        }
+        public void Deactivate(int id, string user)
+        {
+            Lookup lookup = _dbContext.Lookups.Find(id);
+
+            if (lookup == null)
+            {
+                return;
+            }
+
+            lookup.IsActive = false;
+            lookup.LastUpdated = DateTime.Now;
+            lookup.LastUpdatedBy = user;
+            _dbContext.SaveChanges();
         }
     }
 }

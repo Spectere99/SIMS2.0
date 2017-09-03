@@ -8,10 +8,15 @@ namespace SIMSService.Models
 {
     public class LookupTypeModel
     {
+        public LookupTypeModel()
+        {}
+
         [JsonProperty("id")]
         public int Id { get; set; }
-        [JsonProperty("type")]
+        [JsonProperty("typeDescription")]
         public string TypeDescription { get; set; }
+        [JsonProperty("isActive")]
+        public bool IsActive { get; set; }
 
     }
 }

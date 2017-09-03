@@ -17,6 +17,7 @@ namespace SIMSData
         public int Id { get; set; }
         public int UserID { get; set; }
         public int RoleID { get; set; }
+        public bool IsActive { get; set; }
         public System.DateTime Created { get; set; }
         public string CreatedBy { get; set; }
         public System.DateTime LastUpdated { get; set; }
@@ -24,5 +25,7 @@ namespace SIMSData
     
         public virtual Role Role { get; set; }
         public virtual User User { get; set; }
+        public virtual Role Role1 { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

@@ -27,6 +27,7 @@ namespace SIMSData
         public string MiddleName { get; set; }
         public string LastName { get; set; }
         public string EmailAddress { get; set; }
+        public bool IsActive { get; set; }
         public System.DateTime Created { get; set; }
         public string CreatedBy { get; set; }
         public System.DateTime LastUpdated { get; set; }

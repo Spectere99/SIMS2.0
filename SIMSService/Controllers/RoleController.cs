@@ -10,12 +10,12 @@ using SIMSService.Models;
 
 namespace SIMSService.Controllers
 {
-    public class LookupTypeController : ApiController
+    public class RoleController : ApiController
     {
         static ILog _log = log4net.LogManager.GetLogger(
             System.Reflection.MethodBase.GetCurrentMethod().DeclaringType
         );
-        // GET: api/LookupType
+        // GET: api/user
         public IHttpActionResult Get(HttpRequestMessage request)
         {
             if (_log.IsDebugEnabled)
@@ -39,16 +39,16 @@ namespace SIMSService.Controllers
 
                 try
                 {
-                    LookupTypeActions lookupActions = new LookupTypeActions();
-                    _log.Debug("Getting Lookup Types");
-                    IEnumerable<LookupTypeModel> lookupTypeList = lookupActions.Get(showInActive);
-                    var lookupTypeModels = lookupTypeList as IList<LookupTypeModel> ?? lookupTypeList.ToList();
-                    _log.DebugFormat("Lookup Types retreived Count: {0}", lookupTypeModels.Count());
-                    return Ok(lookupTypeModels);
+                    RoleActions roleActions = new RoleActions();
+                    _log.Debug("Getting Roles");
+                    IEnumerable<RoleModel> roleList = roleActions.Get(showInActive);
+                    var roleTypeModels = roleList as IList<RoleModel> ?? roleList.ToList();
+                    _log.DebugFormat("Roles retreived Count: {0}", roleTypeModels.Count());
+                    return Ok(roleTypeModels);
                 }
                 catch (Exception e)
                 {
-                    _log.Error("An error occurred while getting Lookup Types.", e);
+                    _log.Error("An error occurred while getting Roles.", e);
                     return InternalServerError(e);
                 }
             }
@@ -56,7 +56,7 @@ namespace SIMSService.Controllers
             return BadRequest("Header value <userid> not found.");
         }
 
-        // GET: api/LookupType/5
+        // GET: api/user/5
         public IHttpActionResult Get(int id, HttpRequestMessage request)
         {
             if (_log.IsDebugEnabled)
@@ -71,30 +71,30 @@ namespace SIMSService.Controllers
                 var user = headers.GetValues("userid").First();
                 _log.InfoFormat("Handling GET request from user: {0}", user);
 
-                LookupTypeActions lookupActions = new LookupTypeActions();
+                RoleActions roleActions = new RoleActions();
                 try
                 {
-                    _log.Debug("Getting LookupType");
-                    
-                    var lookupTypeModel = lookupActions.GetById(id);
-                    if (lookupTypeModel != null)
+                    _log.Debug("Getting Role");
+
+                    var roleModel = roleActions.GetById(id);
+                    if (roleModel != null)
                     {
-                        _log.DebugFormat("LookupType retrieved. ID: {0}", lookupTypeModel.Id);
-                        return Ok(lookupTypeModel);
+                        _log.DebugFormat("Role retrieved. ID: {0}", roleModel.Id);
+                        return Ok(roleModel);
                     }
                     return Ok();
                 }
                 catch (Exception e)
                 {
-                    _log.Error("An error occurred while getting Lookup Type.", e);
+                    _log.Error("An error occurred while getting Role.", e);
                     return InternalServerError(e);
                 }
             }
             return BadRequest("Header value <userid> not found.");
         }
 
-        // POST: api/LookupType
-        public IHttpActionResult Post(HttpRequestMessage request, [FromBody]LookupTypeModel value)
+        // POST: api/user
+        public IHttpActionResult Post(HttpRequestMessage request, [FromBody]RoleModel value)
         {
             if (_log.IsDebugEnabled)
             {
@@ -110,25 +110,25 @@ namespace SIMSService.Controllers
 
                 if (!ModelState.IsValid)
                     return BadRequest("Invalid data.");
-
                 try
                 {
-                    LookupTypeActions lookupActions = new LookupTypeActions();
+                    RoleActions roleActions = new RoleActions();
 
-                    lookupActions.Insert(value, user);
+                    roleActions.Insert(value, user);
                     return Ok();
                 }
                 catch (Exception e)
                 {
-                    _log.Error("An error occurred while adding Lookup Type.", e);
+                    _log.Error("An error occurred while adding Role.", e);
                     return InternalServerError(e);
                 }
             }
-   
+
             return BadRequest("Header value <userid> not found.");
         }
 
-        public IHttpActionResult Put(HttpRequestMessage request, LookupTypeModel value)
+        // PUT: api/user/5
+        public IHttpActionResult Put(HttpRequestMessage request, RoleModel value)
         {
             if (_log.IsDebugEnabled)
             {
@@ -147,15 +147,15 @@ namespace SIMSService.Controllers
 
                 try
                 {
-                    LookupTypeActions lookupActions = new LookupTypeActions();
-                    
-                    lookupActions.Update(value, user); 
-                    _log.Debug("Lookup Type Updated");
+                    RoleActions roleActions = new RoleActions();
+
+                    roleActions.Update(value, user);
+                    _log.Debug("Role Updated");
                     return Ok();
                 }
                 catch (Exception e)
                 {
-                    _log.Error("An error occurred while updating Lookup Type.", e);
+                    _log.Error("An error occurred while updating Role.", e);
                     return InternalServerError(e);
                 }
             }
@@ -163,7 +163,7 @@ namespace SIMSService.Controllers
             return BadRequest("Header value <userid> not found.");
         }
 
-        // DELETE: api/LookupType/5
+        // DELETE: api/user/5
         public IHttpActionResult Delete(int id, HttpRequestMessage request)
         {
             if (_log.IsDebugEnabled)
@@ -183,14 +183,14 @@ namespace SIMSService.Controllers
 
                 try
                 {
-                    LookupTypeActions lookupActions = new LookupTypeActions();
+                    RoleActions roleActions = new RoleActions();
 
-                    lookupActions.Deactivate(id, user);
+                    roleActions.Deactivate(id, user);
                     return Ok();
                 }
                 catch (Exception e)
                 {
-                    _log.Error("An error occurred while DeActivating Lookup Type.", e);
+                    _log.Error("An error occurred while DeActivating Role.", e);
                     return InternalServerError(e);
                 }
             }

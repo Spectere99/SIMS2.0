@@ -18,6 +18,7 @@ namespace SIMSData
         public int ContactPersonId { get; set; }
         public int ContactPhoneNumberId { get; set; }
         public int ContactPhoneTypeId { get; set; }
+        public bool IsActive { get; set; }
         public System.DateTime Created { get; set; }
         public string CreatedBy { get; set; }
         public System.DateTime LastUpdated { get; set; }

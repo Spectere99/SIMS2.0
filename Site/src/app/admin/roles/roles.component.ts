@@ -1,10 +1,12 @@
-import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter, Inject } from '@angular/core';
 import { Http, HttpModule, Headers, RequestMethod, RequestOptions } from '@angular/http';
 import { NgModel } from '@angular/forms';
 import { DxDataGridModule,
          DxDataGridComponent } from 'devextreme-angular';
 import CustomStore from 'devextreme/data/custom_store';
 import 'rxjs/add/operator/toPromise';
+import { Subscription } from 'rxjs/Subscription';
+
 import { RoleService, Role } from './roles.service';
 import { PermissionService, Permission } from '../permissions/permissions.service';
 
@@ -17,15 +19,22 @@ import { PermissionService, Permission } from '../permissions/permissions.servic
 export class RolesComponent implements OnInit {
   roleDataSource: Array<Role>;
   permissionDataSource: Array<Permission>;
+
   showInactive = false;
+
+
+  @Output() onDataChanged = new EventEmitter<any>();
 
   constructor(public roleService: RoleService, public permissionService: PermissionService) {
     this.refreshData();
    }
 
    refreshData() {
+      console.log('Refresh Data of Roles');
       this.roleService.loadRoleData('rwflowers').subscribe(res => this.roleDataSource = res);
       this.permissionService.loadPermissionData('rwflowers').subscribe(res => this.permissionDataSource = res);
+      console.log('Notifying subscribers of update for Data Refresh (From Roles)');
+      this.onDataChanged.emit();
    }
 
    updateInactive(d) {
@@ -48,8 +57,7 @@ export class RolesComponent implements OnInit {
      console.log('Creating Role');
      console.log(newRole);
 
-     this.roleService.createRole(newRole, 'rwflowers').subscribe();
-     this.refreshData();
+     this.roleService.createRole(newRole, 'rwflowers').subscribe(res => this.refreshData());
    }
 
    saveRole(d) {
@@ -67,16 +75,16 @@ export class RolesComponent implements OnInit {
       lastUpdatebBy: d.newData.lastUpdatebBy === undefined ? d.oldData.lastUpdatebBy : d.newData.lastUpdatebBy
     };
 
-    this.roleService.saveRole(updRole, 'rwflowers').subscribe();
-    this.refreshData();
+    this.roleService.saveRole(updRole, 'rwflowers').subscribe(res => this.refreshData());
+
    }
 
    deactivateRole(d) {
      console.log('Deactivating Role');
      console.log(d);
 
-    this.roleService.deactivateRole(d.key.id, 'rwflowers').subscribe();
-    this.refreshData();
+    this.roleService.deactivateRole(d.key.id, 'rwflowers').subscribe(res => this.refreshData());
+
    }
 
    selectionChanged(data) {

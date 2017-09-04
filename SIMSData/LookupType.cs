@@ -17,7 +17,6 @@ namespace SIMSData
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public LookupType()
         {
-            this.CustomerContacts = new HashSet<CustomerContact>();
             this.Lookups = new HashSet<Lookup>();
         }
     
@@ -29,8 +28,6 @@ namespace SIMSData
         public System.DateTime LastUpdated { get; set; }
         public string LastUpdatedBy { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CustomerContact> CustomerContacts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Lookup> Lookups { get; set; }
     }

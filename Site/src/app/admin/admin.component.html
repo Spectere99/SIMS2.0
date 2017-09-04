@@ -1,5 +1,5 @@
 <div class="container">
-  <h3>Administration Area</h3>
+  <h3>Security Area</h3>
   <hr>
   <div class="row">
     <!-- <div class="col-xs-4">
@@ -13,19 +13,18 @@
         [animationEnabled]="true"
         [swipeEnabled]="true">
           <dxi-item title="Lookups">
-            <app-lookup></app-lookup>  
+            <app-lookup></app-lookup>
           </dxi-item>
           <dxi-item title='Users'>
             <app-user></app-user>
           </dxi-item>
           <dxi-item title='Roles'>
-            <app-roles></app-roles>
+            <app-roles (onDataChanged)="notifyRolesUpdate($event)"></app-roles>
           </dxi-item>
           <dxi-item title='Permissions'>
-            <app-permissions></app-permissions>
+            <app-permissions (onDataChanged)="notifyPermissionsUpdate($event)"></app-permissions>
           </dxi-item>
       </dx-tab-panel>
     </div>
   </div>
 </div>
-

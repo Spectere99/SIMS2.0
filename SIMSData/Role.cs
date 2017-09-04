@@ -30,8 +30,6 @@ namespace SIMSData
         public string LastUpdatedBy { get; set; }
     
         public virtual Permission Permission { get; set; }
-        public virtual UserRole UserRole { get; set; }
-        public virtual Permission Permission1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserRole> UserRoles { get; set; }
     }

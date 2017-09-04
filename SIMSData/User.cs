@@ -32,7 +32,6 @@ namespace SIMSData
         public System.DateTime LastUpdated { get; set; }
         public string LastUpdatedBy { get; set; }
     
-        public virtual UserRole UserRole { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserRole> UserRoles { get; set; }
     }

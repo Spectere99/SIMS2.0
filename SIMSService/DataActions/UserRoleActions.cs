@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using SIMSData;
@@ -13,8 +14,7 @@ namespace SIMSService.DataActions
 
         public UserRoleActions()
         { }
-
-        public IEnumerable<UserRoleModel> GetUserRoles(bool showInactive)
+        public IEnumerable<UserRoleModel> Get(bool showInactive)
         {
             try
             {
@@ -70,7 +70,7 @@ namespace SIMSService.DataActions
             }
 
         }
-        public UserRoleModel GetUserRoleById(int id)
+        public UserRoleModel GetById(int id)
         {
             try
             {
@@ -128,7 +128,7 @@ namespace SIMSService.DataActions
                 _dbContext.Dispose();
             }
         }
-        public void InsertUserRole(UserRoleModel userModel, string user)
+        public void Insert(UserRoleModel userModel, string user)
         {
             UserRole newUserRole = new UserRole
             {
@@ -145,7 +145,7 @@ namespace SIMSService.DataActions
             _dbContext.UserRoles.Add(newUserRole);
             _dbContext.SaveChanges();
         }
-        public void UpdateUserRole(UserRoleModel userModel, string user)
+        public void Update(UserRoleModel userModel, string user)
         {
             UserRole updUserRole = _dbContext.UserRoles.Find(userModel.Id);
             if (updUserRole == null)
@@ -163,9 +163,9 @@ namespace SIMSService.DataActions
             updUserRole.LastUpdatedBy = user;
             _dbContext.SaveChanges();
         }
-        public void DeactivateUserRole(int id, string user)
+        public void Deactivate(int id, string user)
         {
-            UserRole delUser = _dbContext.UserRoles.Find(id);
+            UserRole delUser = _dbContext.UserRoles.FirstOrDefault(p => p.RoleID == id);
 
             if (delUser == null)
             {
@@ -177,6 +177,19 @@ namespace SIMSService.DataActions
             delUser.LastUpdatedBy = user;
             _dbContext.SaveChanges();
 
+        }
+
+        public void Delete(int id, string user)
+        {
+            UserRole delUserRole = _dbContext.UserRoles.FirstOrDefault(p => p.Id == id);
+
+            if (delUserRole == null)
+            {
+                return;
+            }
+
+            _dbContext.Entry(delUserRole).State = EntityState.Deleted;
+            _dbContext.SaveChanges();
         }
     }
 }

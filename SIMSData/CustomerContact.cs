@@ -22,7 +22,6 @@ namespace SIMSData
     
         public virtual ContactPerson ContactPerson { get; set; }
         public virtual Customer Customer { get; set; }
-        public virtual LookupType LookupType { get; set; }
         public virtual Lookup Lookup { get; set; }
     }
 }

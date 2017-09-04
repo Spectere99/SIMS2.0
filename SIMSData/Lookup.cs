@@ -38,8 +38,8 @@ namespace SIMSData
         public virtual ICollection<ContactPersonPhone> ContactPersonPhones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ContactPhoneNumber> ContactPhoneNumbers { get; set; }
-        public virtual LookupType LookupType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CustomerContact> CustomerContacts { get; set; }
+        public virtual LookupType LookupType { get; set; }
     }
 }

@@ -1,10 +1,12 @@
-import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject, Output, EventEmitter } from '@angular/core';
 import { Http, HttpModule, Headers, RequestMethod, RequestOptions } from '@angular/http';
 import { NgModel } from '@angular/forms';
 import { DxDataGridModule,
          DxDataGridComponent } from 'devextreme-angular';
 import CustomStore from 'devextreme/data/custom_store';
 import 'rxjs/add/operator/toPromise';
+import { Subscription } from 'rxjs/Subscription';
+
 import { PermissionService, Permission } from '../permissions/permissions.service';
 
 @Component({
@@ -14,8 +16,11 @@ import { PermissionService, Permission } from '../permissions/permissions.servic
   providers: [ PermissionService ]
 })
 export class PermissionsComponent implements OnInit {
+  @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
   permissionDataSource: Array<Permission>;
   showInactive = false;
+
+  @Output() onDataChanged = new EventEmitter<any>();
 
   constructor(public permissionService: PermissionService) {
     this.refreshData();
@@ -23,6 +28,8 @@ export class PermissionsComponent implements OnInit {
 
    refreshData() {
       this.permissionService.loadPermissionData('rwflowers').subscribe(res => this.permissionDataSource = res);
+      console.log('Notifying subscribers of update for Data Refresh (From Permissions)');
+      this.onDataChanged.emit();
    }
 
    updateInactive(d) {
@@ -48,7 +55,7 @@ export class PermissionsComponent implements OnInit {
      console.log('Creating Permission');
      console.log(newPermission);
 
-     this.permissionService.createPermission(newPermission, 'rwflowers').subscribe();
+     this.permissionService.createPermission(newPermission, 'rwflowers').subscribe(res => this.refreshData());
      this.refreshData();
    }
 
@@ -70,16 +77,16 @@ export class PermissionsComponent implements OnInit {
       lastUpdatebBy: d.newData.lastUpdatebBy === undefined ? d.oldData.lastUpdatebBy : d.newData.lastUpdatebBy
     };
 
-    this.permissionService.savePermission(updPermission, 'rwflowers').subscribe();
+    this.permissionService.savePermission(updPermission, 'rwflowers').subscribe(res => this.refreshData());
     this.refreshData();
    }
 
    deactivatePermission(d) {
      console.log('Deactivating Permission');
      console.log(d);
-
-    this.permissionService.deactivatePermission(d.key.id, 'rwflowers').subscribe();
-    this.refreshData();
+    this.permissionService.deactivatePermission(d.key.id, 'rwflowers').subscribe(res => this.refreshData());
+    // this.refreshData();
+    // this.dataGrid.instance.refresh();
    }
 
    selectionChanged(data) {
@@ -119,3 +126,4 @@ export class PermissionsComponent implements OnInit {
   }
 
 }
+

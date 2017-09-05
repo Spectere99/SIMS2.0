@@ -8,132 +8,112 @@
     </div>
 </div>
 <div class="container col-xs-12">
-  <div class="row">
-      <div class="col-xs-12">
-          <div class="panel panel-default">
-              <div class="panel-heading">
-                  <h3 class="panel-title">Users</h3>
-              </div>
-              <div class="panel-body">
-                      <dx-data-grid id="userGrid"
-                      [dataSource]="userDataSource"
-                      (onSelectionChanged)="selectionChanged($event)"
-                      (onRowInserting)="createUser($event)"
-                      (onRowInserted)="refreshData()"
-                      (onRowUpdating)="saveUser($event)"
-                      (onRowUpdated)="refreshData()"
-                      (onRowRemoving)="deactivateUser($event)"
-                      (onRowRemoved)="refreshData()"
-                      (onContentReady)="moveEditColumnToLeft($event)"
-                      (onCellPrepared)="formatCommandColumn($event)">
-                      <dxo-selection mode="single"></dxo-selection>
-                      <dxi-column dataField="id" [allowEditing]="false" [width]="50"  [visible]="false"></dxi-column>
-                      <dxi-column dataField="userName" [width]="100"></dxi-column>
-                      <dxi-column dataField="firstName" [width]="100"></dxi-column>
-                      <dxi-column dataField="lastName" [width]="100"></dxi-column>
-                      <dxi-column dataField="email" [width]="175"></dxi-column>
-                      <dxi-column dataField="contactNumber" [width]="100"></dxi-column>
-                      <dxi-column dataField="isActive" dataType='boolean' [width]="90"></dxi-column>
-                      <dxi-column dataField="lastUpdated" [allowEditing]="false" [width]="120" dataType="date" format="shortDateShortTime"></dxi-column>
-                      <dxi-column dataField="lastUpdatedBy" [allowEditing]="false" [width]="90"></dxi-column>
-                      <dxi-column dataField="created" [allowEditing]="false" [width]="100" dataType="date" format="shortDateShortTime"></dxi-column>
-                      <dxi-column dataField="createdBy" [allowEditing]="false" [width]="90"></dxi-column>
-                      <dxo-header-filter 
-                          [dataSource]="orderHeaderFilter"></dxo-header-filter>
-                      <dxo-remote-operations
-                          [sorting]="true"
-                          [paging]="true">
-                      </dxo-remote-operations>
-                      <dxo-column-chooser
-                          [enabled]="false"></dxo-column-chooser>
-                      <dxo-paging [pageSize]="8"></dxo-paging>
-                      <dxo-editing 
-                          mode="popup"
-                          [allowUpdating]="true"
-                          [allowDeleting]="true"
-                          [allowAdding]="true">
-                              <dxo-popup
-                              title="User Info"
-                              [showTitle]="true"
-                              [width]="700"
-                              [height]="450"
-                              [position]="{ my: 'top', at: 'top', of: window }">
-                              </dxo-popup>
-                      </dxo-editing>
-                      <dxo-filter-row 
-                      [visible]="true" 
-                      [applyFilter]="onClick"></dxo-filter-row>
-                      <dxo-header-filter 
-                      [visible]="true"></dxo-header-filter>
-                      <dxo-pager
-                          [showPageSizeSelector]="true"
-                          [allowedPageSizes]="[8, 12, 20]"
-                      ></dxo-pager>
-                      </dx-data-grid>  
-              </div>
-          </div>
-      </div>
-  </div>
-  <div class="row">
-      <hr>
-      <div *ngIf="selectedUser" class="col-md-6"><h5>Permission Details for </h5><h4>{{selectedUser.userName}}</h4></div>
-      
-  </div>
-  <div class="row">
-      <div class="col-md-6">
-          <div class="panel panel-primary">
-              <div class="panel-heading">
-                  <h3 class="panel-title pull-left">User Roles</h3>
-                  <dx-button
-                   class="btn btn-default btn-sm pull-right"
-                   text="Apply"
-                   [disabled]="!rolesChanged"
-                  (onClick)="updateUserRole(selectedUser.id, 'rwflowers')">
-                  </dx-button>
-                  <div class="clearfix"></div>
-              </div>
-                <div class="panel-body">
-                    <div *ngFor="let userRole of selectedUserRoles" class="panel panel-default">
-                        <div class="panel-heading">
-                            <dx-button
-                            icon="glyphicon glyphicon-arrow-right"
-                            class="btn btn-default btn-sm pull-right"
-                            (onClick)="removeRole(userRole.id)">
-                            </dx-button>
-                            <span style="color:darkblue; font-size: 16px" class="pull-left">&nbsp;{{userRole.role}} - Module - {{userRole.permission.permissionModuleKey}}&nbsp;&nbsp;</span>    
-                            <span *ngIf="userRole.permission.canAccess" class="badge pull-left">Access</span>
-                            <span *ngIf="userRole.permission.canUpdate" class="badge pull-left">Update</span>
-                            <span *ngIf="userRole.permission.canDelete" class="badge pull-left">Delete</span>  
-                            <div class="clearfix"></div>                                       
-                        </div>
-                    </div>
-                </div>
-          </div>
-      </div>
-      <div class="col-md-6">
-          <div class="panel panel-default">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title pull-left">Available Roles</h3>
-                    <div class="clearfix"></div>
+                    <span><h3 class="panel-title">Users </h3>(Select a User Name below to see Role Assignment)</span>
                 </div>
                 <div class="panel-body">
-                    <div *ngFor="let role of filteredRoles" class="panel panel-default">
+                    <dx-data-grid id="userGrid" [dataSource]="userDataSource" (onSelectionChanged)="selectionChanged($event)" (onRowInserting)="createUser($event)"
+                        (onRowInserted)="refreshData()" (onRowUpdating)="saveUser($event)" (onRowUpdated)="refreshData()" (onRowRemoving)="deactivateUser($event)"
+                        (onRowRemoved)="refreshData()" (onContentReady)="moveEditColumnToLeft($event)" (onCellPrepared)="formatCommandColumn($event)">
+                        <dxo-selection mode="single"></dxo-selection>
+                        <dxi-column dataField="id" [allowEditing]="false" [width]="50" [visible]="false"></dxi-column>
+                        <dxi-column dataField="userName" [width]="100">
+                            <dxi-validation-rule type="required"></dxi-validation-rule>
+                        </dxi-column>
+                        <dxi-column dataField="firstName" [width]="100">
+                            <dxi-validation-rule type="required"></dxi-validation-rule>
+                        </dxi-column>
+                        <dxi-column dataField="lastName" [width]="100">
+                            <dxi-validation-rule type="required"></dxi-validation-rule>
+                        </dxi-column>
+                        <dxi-column dataField="email" [width]="175"></dxi-column>
+                        <dxi-column dataField="contactNumber" [width]="100">
+                            <dxi-validation-rule type="pattern" [pattern]="phonePattern" message="Your phone must have &#34;(###) ###-####&#34; format!"></dxi-validation-rule>
+                        </dxi-column>
+                        <dxi-column dataField="isActive" dataType='boolean' [width]="90"></dxi-column>
+                        <dxi-column dataField="lastUpdated" [allowEditing]="false" [width]="120" dataType="date" format="shortDateShortTime"></dxi-column>
+                        <dxi-column dataField="lastUpdatedBy" [allowEditing]="false" [width]="90"></dxi-column>
+                        <dxi-column dataField="created" [allowEditing]="false" [width]="100" dataType="date" format="shortDateShortTime"></dxi-column>
+                        <dxi-column dataField="createdBy" [allowEditing]="false" [width]="90"></dxi-column>
+                        <dxo-header-filter [dataSource]="orderHeaderFilter"></dxo-header-filter>
+                        <dxo-remote-operations [sorting]="true" [paging]="true">
+                        </dxo-remote-operations>
+                        <dxo-column-chooser [enabled]="false"></dxo-column-chooser>
+                        <dxo-paging [pageSize]="8"></dxo-paging>
+                        <dxo-editing mode="popup" [allowUpdating]="true" [allowDeleting]="true" [allowAdding]="true">
+                            <dxo-popup title="User Info" [showTitle]="true" [width]="700" [height]="450" >
+                                <dxi-item itemType="group" caption="Stuff">
+                                    <dxi-item dataField="created"></dxi-item>
+                                    <dxi-item dataField="createdBy"></dxi-item>
+                                </dxi-item>
+                            </dxo-popup>
+                        </dxo-editing>
+                        <dxo-filter-row [visible]="true" [applyFilter]="onClick"></dxo-filter-row>
+                        <dxo-header-filter [visible]="true"></dxo-header-filter>
+                        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[8, 12, 20]"></dxo-pager>
+                    </dx-data-grid>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="selectedUser" class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div *ngIf="selectedUser" class="col-md-12">
+                    <h4>Role Details for <strong>{{selectedUser.userName}}</strong></h4>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <dx-button
-                            icon="glyphicon glyphicon-arrow-left"
-                            class="btn btn-default pull-left"
-                            (onClick)="addRole(role.id)">
+                            <h3 class="panel-title pull-left">Assigned Roles</h3>
+                            <dx-button class="btn btn-default btn-sm pull-right" text="Apply" [disabled]="!rolesChanged" (onClick)="updateUserRole(selectedUser.id, 'rwflowers')">
                             </dx-button>
-                            <span style="color:darkblue; font-size: 16px">&nbsp;{{role.role}} - Module - {{role.permission.permissionModuleKey}}</span>
-                            <span *ngIf="role.permission.canAccess" class="badge pull-right">Access</span>
-                            <span *ngIf="role.permission.canUpdate" class="badge pull-right">Update</span>
-                            <span *ngIf="role.permission.canDelete" class="badge pull-right">Delete</span>
-                            &nbsp; 
-                            <div class="clearfix"></div>           
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="panel-body">
+                            <div *ngFor="let userRole of selectedUserRoles" class="panel panel-default">
+                                <div class="panel-heading">
+                                    <dx-button icon="glyphicon glyphicon-arrow-right" class="btn btn-default btn-sm pull-right" (onClick)="removeRole(userRole.id)">
+                                    </dx-button>
+                                    <span style="color:darkblue; font-size: 16px" class="pull-left">&nbsp;{{userRole.role}} - Module - {{userRole.permission.permissionModuleKey}}&nbsp;&nbsp;</span>
+                                    <span *ngIf="userRole.permission.canAccess" class="badge pull-left">Access</span>
+                                    <span *ngIf="userRole.permission.canUpdate" class="badge pull-left">Update</span>
+                                    <span *ngIf="userRole.permission.canDelete" class="badge pull-left">Delete</span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-          </div>
-      </div>
-  </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title pull-left">Available Roles</h3>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="panel-body">
+                            <div *ngFor="let role of filteredRoles" class="panel panel-default">
+                                <div class="panel-heading">
+                                    <dx-button icon="glyphicon glyphicon-arrow-left" class="btn btn-default pull-left" (onClick)="addRole(role.id)">
+                                    </dx-button>
+                                    <span style="color:darkblue; font-size: 16px">&nbsp;{{role.role}} - Module - {{role.permission.permissionModuleKey}}</span>
+                                    <span *ngIf="role.permission.canAccess" class="badge pull-right">Access</span>
+                                    <span *ngIf="role.permission.canUpdate" class="badge pull-right">Update</span>
+                                    <span *ngIf="role.permission.canDelete" class="badge pull-right">Delete</span> &nbsp;
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

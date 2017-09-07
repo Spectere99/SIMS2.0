@@ -31,7 +31,7 @@
                         </dxi-column>
                         <dxi-column dataField="email" [width]="175"></dxi-column>
                         <dxi-column dataField="contactNumber" [width]="100">
-                            <dxi-validation-rule type="pattern" [pattern]="phonePattern" message="Your phone must have &#34;(###) ###-####&#34; format!"></dxi-validation-rule>
+                            <dxi-validation-rule type="pattern" [pattern]="phonePattern" message="Your phone must have &#34;(###)###-####&#34; format!"></dxi-validation-rule>
                         </dxi-column>
                         <dxi-column dataField="isActive" dataType='boolean' [width]="90"></dxi-column>
                         <dxi-column dataField="lastUpdated" [allowEditing]="false" [width]="120" dataType="date" format="shortDateShortTime"></dxi-column>
@@ -45,11 +45,19 @@
                         <dxo-paging [pageSize]="8"></dxo-paging>
                         <dxo-editing mode="popup" [allowUpdating]="true" [allowDeleting]="true" [allowAdding]="true">
                             <dxo-popup title="User Info" [showTitle]="true" [width]="700" [height]="450" >
-                                <dxi-item itemType="group" caption="Stuff">
-                                    <dxi-item dataField="created"></dxi-item>
-                                    <dxi-item dataField="createdBy"></dxi-item>
-                                </dxi-item>
                             </dxo-popup>
+                            <dxo-form colCount="2">
+                                <dxi-item itemType="group" caption="General">
+                                    <dxi-item dataField="userName"></dxi-item>
+                                    <dxi-item dataField="email"></dxi-item>
+                                    <dxi-item dataField="isActive"></dxi-item>
+                                </dxi-item>
+                                <dxi-item itemType="group" caption="Contact Details">
+                                    <dxi-item dataField="firstName"></dxi-item>
+                                    <dxi-item dataField="lastName"></dxi-item>
+                                    <dxi-item dataField="contactNumber"></dxi-item>
+                                </dxi-item>
+                            </dxo-form>
                         </dxo-editing>
                         <dxo-filter-row [visible]="true" [applyFilter]="onClick"></dxo-filter-row>
                         <dxo-header-filter [visible]="true"></dxo-header-filter>

@@ -18,6 +18,7 @@ namespace SIMSData
         public User()
         {
             this.UserRoles = new HashSet<UserRole>();
+            this.UserSecurities = new HashSet<UserSecurity>();
         }
     
         public int Id { get; set; }
@@ -34,5 +35,7 @@ namespace SIMSData
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserRole> UserRoles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserSecurity> UserSecurities { get; set; }
     }
 }

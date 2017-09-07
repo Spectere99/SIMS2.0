@@ -7,7 +7,7 @@ using SIMSService.Models;
 
 namespace SIMSService.DataActions
 {
-    public class LookupActions
+    public class LookupActions : IActions<LookupModel>
     {
         private readonly ScreenPrintManagementEntities _dbContext = new ScreenPrintManagementEntities();
 

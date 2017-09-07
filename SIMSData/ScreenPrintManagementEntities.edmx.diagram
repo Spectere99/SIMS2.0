@@ -32,6 +32,8 @@
         <AssociationConnector Association="ScreenPrintManagementModel.FK_Roles_Permissions" ManuallyRouted="false" />
         <AssociationConnector Association="ScreenPrintManagementModel.FK_UserRoles_Roles" ManuallyRouted="false" />
         <AssociationConnector Association="ScreenPrintManagementModel.FK_UserRoles_Users" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ScreenPrintManagementModel.UserSecurity" Width="1.5" PointX="13.25" PointY="5.25" />
+        <AssociationConnector Association="ScreenPrintManagementModel.FK_UserSecurity_Users" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

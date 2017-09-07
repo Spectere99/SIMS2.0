@@ -54,12 +54,19 @@
                 [allowUpdating]="true"
                 [allowDeleting]="true"
                 [allowAdding]="true">
-                    <dxo-popup
-                    title="User Info"
-                    [showTitle]="true"
-                    [width]="700"
-                    [height]="450">
-                    </dxo-popup>
+                <dxo-popup
+                title="User Info"
+                [showTitle]="true"
+                [width]="350"
+                [height]="275">
+                </dxo-popup>
+                <dxo-form colCount="1">
+                    <dxi-item itemType="group" caption="General">
+                        <dxi-item dataField="role"></dxi-item>
+                        <dxi-item dataField="permissionId"></dxi-item>
+                        <dxi-item dataField="isActive"></dxi-item>
+                    </dxi-item>
+                </dxo-form>
             </dxo-editing>
             <dxo-filter-row 
             [visible]="true" 

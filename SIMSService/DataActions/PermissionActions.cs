@@ -7,7 +7,7 @@ using SIMSService.Models;
 
 namespace SIMSService.DataActions
 {
-    public class PermissionActions
+    public class PermissionActions : IActions<PermissionModel>
     {
         private readonly ScreenPrintManagementEntities _dbContext = new ScreenPrintManagementEntities();
 

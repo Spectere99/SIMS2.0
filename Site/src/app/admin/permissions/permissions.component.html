@@ -35,8 +35,20 @@
           <dxo-column-chooser [enabled]="false"></dxo-column-chooser>
           <dxo-paging [pageSize]="8"></dxo-paging>
           <dxo-editing mode="popup" [allowUpdating]="true" [allowDeleting]="true" [allowAdding]="true">
-            <dxo-popup title="User Info" [showTitle]="true" [width]="700" [height]="450">
+            <dxo-popup title="User Info" [showTitle]="true" [width]="350" [height]="450">
             </dxo-popup>
+            <dxo-form colCount="1">
+              <dxi-item itemType="group" caption="General">
+                <dxi-item dataField="permission"></dxi-item>
+                <dxi-item dataField="permissionModuleKey"></dxi-item>
+                <dxi-item dataField="isActive"></dxi-item>
+              </dxi-item>
+              <dxi-item itemType="group" caption="Permissions">
+                <dxi-item dataField="canAccess"></dxi-item>
+                <dxi-item dataField="canUpdate"></dxi-item>
+                <dxi-item dataField="canDelete"></dxi-item>
+              </dxi-item>
+            </dxo-form>
           </dxo-editing>
           <dxo-filter-row [visible]="true" [applyFilter]="onClick"></dxo-filter-row>
           <dxo-header-filter [visible]="true"></dxo-header-filter>

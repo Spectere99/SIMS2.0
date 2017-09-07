@@ -106,6 +106,9 @@
     <Compile Include="UserRole.cs">
       <DependentUpon>ScreenPrintManagementEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="UserSecurity.cs">
+      <DependentUpon>ScreenPrintManagementEntities.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

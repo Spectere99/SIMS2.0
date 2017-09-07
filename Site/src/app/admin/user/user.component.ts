@@ -32,7 +32,7 @@ export class UserComponent implements OnInit {
   showInactive = false;
   popupVisible = false;
 
-  phonePattern: any = /^\(\d{3}\)\ \d{3}-\d{4}$/i;
+  phonePattern: any = /^\(\d{3}\)\\d{3}-\d{4}$/i;
 
   @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
 

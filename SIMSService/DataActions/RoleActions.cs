@@ -7,7 +7,7 @@ using SIMSService.Models;
 
 namespace SIMSService.DataActions
 {
-    public class RoleActions
+    public class RoleActions : IActions<RoleModel>
     {
         private readonly ScreenPrintManagementEntities _dbContext = new ScreenPrintManagementEntities();
 

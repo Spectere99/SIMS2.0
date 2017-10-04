@@ -86,58 +86,97 @@ namespace SIMSService.DataActions
         }
         public void Insert(PermissionModel permissionModel, string user)
         {
-            Permission newPermission = new Permission
+            try
             {
-                Id = permissionModel.Id,
-                Permission1 = permissionModel.Permission,
-                PermissionModuleKey = permissionModel.PermissionModuleKey,
-                CanAccess = permissionModel.CanAccess,
-                CanUpdate = permissionModel.CanUpdate,
-                CanDelete = permissionModel.CanDelete,
-                IsActive = permissionModel.IsActive,
-                Created = DateTime.Now,
-                CreatedBy = user,
-                LastUpdated = DateTime.Now,
-                LastUpdatedBy = user
-            };
+                Permission newPermission = new Permission
+                {
+                    Id = permissionModel.Id,
+                    Permission1 = permissionModel.Permission,
+                    PermissionModuleKey = permissionModel.PermissionModuleKey,
+                    CanAccess = permissionModel.CanAccess,
+                    CanUpdate = permissionModel.CanUpdate,
+                    CanDelete = permissionModel.CanDelete,
+                    IsActive = permissionModel.IsActive,
+                    Created = DateTime.Now,
+                    CreatedBy = user,
+                    LastUpdated = DateTime.Now,
+                    LastUpdatedBy = user
+                };
 
-            _dbContext.Permissions.Add(newPermission);
-            _dbContext.SaveChanges();
+                _dbContext.Permissions.Add(newPermission);
+                _dbContext.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _dbContext.Dispose();
+            }
+            
         }
         public void Update(PermissionModel permissionModel, string user)
         {
-            Permission updPermission = _dbContext.Permissions.Find(permissionModel.Id);
-            if (updPermission == null)
+            try
             {
-                return;
-            }
+                Permission updPermission = _dbContext.Permissions.Find(permissionModel.Id);
+                if (updPermission == null)
+                {
+                    return;
+                }
 
-            updPermission.Id = permissionModel.Id;
-            updPermission.Permission1 = permissionModel.Permission;
-            updPermission.PermissionModuleKey = permissionModel.PermissionModuleKey;
-            updPermission.CanAccess = permissionModel.CanAccess;
-            updPermission.CanUpdate = permissionModel.CanUpdate;
-            updPermission.CanDelete = permissionModel.CanDelete;
-            updPermission.IsActive = permissionModel.IsActive;
-            updPermission.Created = DateTime.Now;
-            updPermission.CreatedBy = user;
-            updPermission.LastUpdated = DateTime.Now;
-            updPermission.LastUpdatedBy = user;
-            _dbContext.SaveChanges();
+                updPermission.Id = permissionModel.Id;
+                updPermission.Permission1 = permissionModel.Permission;
+                updPermission.PermissionModuleKey = permissionModel.PermissionModuleKey;
+                updPermission.CanAccess = permissionModel.CanAccess;
+                updPermission.CanUpdate = permissionModel.CanUpdate;
+                updPermission.CanDelete = permissionModel.CanDelete;
+                updPermission.IsActive = permissionModel.IsActive;
+                updPermission.Created = DateTime.Now;
+                updPermission.CreatedBy = user;
+                updPermission.LastUpdated = DateTime.Now;
+                updPermission.LastUpdatedBy = user;
+                _dbContext.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                
+            }
+            
         }
         public void Deactivate(int id, string user)
         {
-            Permission delPermission = _dbContext.Permissions.Find(id);
-
-            if (delPermission == null)
+            try
             {
-                return;
-            }
+                Permission delPermission = _dbContext.Permissions.Find(id);
 
-            delPermission.IsActive = false;
-            delPermission.LastUpdated = DateTime.Now;
-            delPermission.LastUpdatedBy = user;
-            _dbContext.SaveChanges();
+                if (delPermission == null)
+                {
+                    return;
+                }
+
+                delPermission.IsActive = false;
+                delPermission.LastUpdated = DateTime.Now;
+                delPermission.LastUpdatedBy = user;
+                _dbContext.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _dbContext.Dispose();
+            }
+            
 
         }
     }

@@ -11,11 +11,6 @@ namespace SIMSService.DataActions
     {
         private readonly ScreenPrintManagementEntities _dbContext = new ScreenPrintManagementEntities();
 
-        public LookupActions()
-        {
-            
-        }
-
         public IEnumerable<LookupModel> Get(bool showInactive)
         {
             try
@@ -81,49 +76,84 @@ namespace SIMSService.DataActions
         }
         public void Insert(LookupModel lookupModel, string user)
         {
-            Lookup lookup = new Lookup
+            try
             {
-                Id = 0,
-                Value = lookupModel.Value,
-                LookupTypeId = lookupModel.LookupTypeId,
-                IsActive = lookupModel.IsActive,
-                Created = DateTime.Now,
-                CreatedBy = user,
-                LastUpdated = DateTime.Now,
-                LastUpdatedBy = user
-            };
+                Lookup lookup = new Lookup
+                {
+                    Id = 0,
+                    Value = lookupModel.Value,
+                    LookupTypeId = lookupModel.LookupTypeId,
+                    IsActive = lookupModel.IsActive,
+                    Created = DateTime.Now,
+                    CreatedBy = user,
+                    LastUpdated = DateTime.Now,
+                    LastUpdatedBy = user
+                };
 
-            _dbContext.Lookups.Add(lookup);
-            _dbContext.SaveChanges();
+                _dbContext.Lookups.Add(lookup);
+                _dbContext.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            
         }
         public void Update(LookupModel lookupModel, string user)
         {
-            Lookup lookup = _dbContext.Lookups.Find(lookupModel.Id);
-            if (lookup == null)
+            try
             {
-                return;
-            }
+                Lookup lookup = _dbContext.Lookups.Find(lookupModel.Id);
+                if (lookup == null)
+                {
+                    return;
+                }
 
-            lookup.Value = lookupModel.Value;
-            lookup.LookupTypeId = lookupModel.LookupTypeId;
-            lookup.IsActive = lookupModel.IsActive;
-            lookup.LastUpdated = DateTime.Now;
-            lookup.LastUpdatedBy = user;
-            _dbContext.SaveChanges();
+                lookup.Value = lookupModel.Value;
+                lookup.LookupTypeId = lookupModel.LookupTypeId;
+                lookup.IsActive = lookupModel.IsActive;
+                lookup.LastUpdated = DateTime.Now;
+                lookup.LastUpdatedBy = user;
+                _dbContext.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _dbContext.Dispose();
+            }
+            
         }
         public void Deactivate(int id, string user)
         {
-            Lookup lookup = _dbContext.Lookups.Find(id);
-
-            if (lookup == null)
+            try
             {
-                return;
-            }
+                Lookup lookup = _dbContext.Lookups.Find(id);
 
-            lookup.IsActive = false;
-            lookup.LastUpdated = DateTime.Now;
-            lookup.LastUpdatedBy = user;
-            _dbContext.SaveChanges();
+                if (lookup == null)
+                {
+                    return;
+                }
+
+                lookup.IsActive = false;
+                lookup.LastUpdated = DateTime.Now;
+                lookup.LastUpdatedBy = user;
+                _dbContext.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _dbContext.Dispose();
+            }
+            
         }
     }
 }

@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <label><input [(ngModel)]="showInactive" (change)="updateInactive($event)" type="checkbox"> Show Inactive</label>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Permissions</h3>
+      </div>
+      <div class="panel-body">
+        <dx-data-grid id="permissionGrid" [dataSource]="permissionDataSource" (onSelectionChanged)="selectionChanged($event)" (onRowInserting)="createPermission($event)"
+          (onRowInserted)="refreshData()" (onRowUpdating)="savePermission($event)" (onRowUpdated)="refreshData()" (onRowRemoving)="deactivatePermission($event)"
+          (onRowRemoved)="refreshData()" (onContentReady)="moveEditColumnToLeft($event)" (onCellPrepared)="formatCommandColumn($event)">
+          <dxo-selection mode="single"></dxo-selection>
+          <dxi-column dataField="id" [allowEditing]="false" [width]="50" [visible]="false"></dxi-column>
+          <dxi-column dataField="permission" [width]="100"></dxi-column>
+          <dxi-column dataField="permissionModuleKey" caption='Module' [width]="100"></dxi-column>
+          <dxi-column dataField="canAccess" caption='Access' dataType='boolean' [width]="90"></dxi-column>
+          <dxi-column dataField="canUpdate" caption="Update" dataType='boolean' [width]="90"></dxi-column>
+          <dxi-column dataField="canDelete" caption="Delete" dataType='boolean' [width]="90"></dxi-column>
+          <dxi-column dataField="isActive" dataType='boolean' [width]="90"></dxi-column>
+          <dxi-column dataField="lastUpdated" [allowEditing]="false" [width]="120" dataType="date" format="shortDateShortTime"></dxi-column>
+          <dxi-column dataField="lastUpdatedBy" [allowEditing]="false" [width]="90"></dxi-column>
+          <dxi-column dataField="created" [allowEditing]="false" [width]="100" dataType="date" format="shortDateShortTime"></dxi-column>
+          <dxi-column dataField="createdBy" [allowEditing]="false" [width]="90"></dxi-column>
+          <dxo-header-filter [dataSource]="orderHeaderFilter"></dxo-header-filter>
+          <dxo-remote-operations [sorting]="true" [paging]="true">
+          </dxo-remote-operations>
+          <dxo-column-chooser [enabled]="false"></dxo-column-chooser>
+          <dxo-paging [pageSize]="8"></dxo-paging>
+          <dxo-editing mode="popup" [allowUpdating]="true" [allowDeleting]="true" [allowAdding]="true">
+            <dxo-popup title="User Info" [showTitle]="true" [width]="350" [height]="450">
+            </dxo-popup>
+            <dxo-form colCount="1">
+              <dxi-item itemType="group" caption="General">
+                <dxi-item dataField="permission"></dxi-item>
+                <dxi-item dataField="permissionModuleKey"></dxi-item>
+                <dxi-item dataField="isActive"></dxi-item>
+              </dxi-item>
+              <dxi-item itemType="group" caption="Permissions">
+                <dxi-item dataField="canAccess"></dxi-item>
+                <dxi-item dataField="canUpdate"></dxi-item>
+                <dxi-item dataField="canDelete"></dxi-item>
+              </dxi-item>
+            </dxo-form>
+          </dxo-editing>
+          <dxo-filter-row [visible]="true" [applyFilter]="onClick"></dxo-filter-row>
+          <dxo-header-filter [visible]="true"></dxo-header-filter>
+          <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[8, 12, 20]"></dxo-pager>
+        </dx-data-grid>
+      </div>
+    </div>
+  </div>
+</div>

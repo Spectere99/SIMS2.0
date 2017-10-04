@@ -108,53 +108,90 @@ namespace SIMSService.DataActions
         }
         public void Insert(RoleModel roleModel, string user)
         {
-            Role newRole = new Role
+            try
             {
-                Id = roleModel.Id,
-                Role1 = roleModel.Role,
-                PermissionId = roleModel.PermissionId,
-                IsActive = roleModel.IsActive,
-                Created = DateTime.Now,
-                CreatedBy = user,
-                LastUpdated = DateTime.Now,
-                LastUpdatedBy = user
-            };
+                Role newRole = new Role
+                {
+                    Id = roleModel.Id,
+                    Role1 = roleModel.Role,
+                    PermissionId = roleModel.PermissionId,
+                    IsActive = roleModel.IsActive,
+                    Created = DateTime.Now,
+                    CreatedBy = user,
+                    LastUpdated = DateTime.Now,
+                    LastUpdatedBy = user
+                };
 
-            _dbContext.Roles.Add(newRole);
-            _dbContext.SaveChanges();
+                _dbContext.Roles.Add(newRole);
+                _dbContext.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _dbContext.Dispose();
+            }
+            
         }
         public void Update(RoleModel roleModel, string user)
         {
-            Role updRole = _dbContext.Roles.Find(roleModel.Id);
-            if (updRole == null)
+            try
             {
-                return;
-            }
+                Role updRole = _dbContext.Roles.Find(roleModel.Id);
+                if (updRole == null)
+                {
+                    return;
+                }
 
-            updRole.Id = roleModel.Id;
-            updRole.Role1 = roleModel.Role;
-            updRole.PermissionId = roleModel.PermissionId;
-            updRole.IsActive = roleModel.IsActive;
-            updRole.Created = DateTime.Now;
-            updRole.CreatedBy = user;
-            updRole.LastUpdated = DateTime.Now;
-            updRole.LastUpdatedBy = user;
-            _dbContext.SaveChanges();
+                updRole.Id = roleModel.Id;
+                updRole.Role1 = roleModel.Role;
+                updRole.PermissionId = roleModel.PermissionId;
+                updRole.IsActive = roleModel.IsActive;
+                updRole.Created = DateTime.Now;
+                updRole.CreatedBy = user;
+                updRole.LastUpdated = DateTime.Now;
+                updRole.LastUpdatedBy = user;
+                _dbContext.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _dbContext.Dispose();
+            }
+            
         }
         public void Deactivate(int id, string user)
         {
-            Role delRole = _dbContext.Roles.Find(id);
-
-            if (delRole == null)
+            try
             {
-                return;
+                Role delRole = _dbContext.Roles.Find(id);
+
+                if (delRole == null)
+                {
+                    return;
+                }
+
+                delRole.IsActive = false;
+                delRole.LastUpdated = DateTime.Now;
+                delRole.LastUpdatedBy = user;
+                _dbContext.SaveChanges();
             }
-
-            delRole.IsActive = false;
-            delRole.LastUpdated = DateTime.Now;
-            delRole.LastUpdatedBy = user;
-            _dbContext.SaveChanges();
-
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _dbContext.Dispose();
+            }
         }
     }
 }

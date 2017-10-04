@@ -130,53 +130,90 @@ namespace SIMSService.DataActions
         }
         public void Insert(UserRoleModel userModel, string user)
         {
-            UserRole newUserRole = new UserRole
+            try
             {
-                Id = userModel.Id,
-                RoleID = userModel.RoleId,
-                UserID = userModel.UserId,
-                IsActive = userModel.IsActive,
-                Created = DateTime.Now,
-                CreatedBy = user,
-                LastUpdated = DateTime.Now,
-                LastUpdatedBy = user
-            };
+                UserRole newUserRole = new UserRole
+                {
+                    Id = userModel.Id,
+                    RoleID = userModel.RoleId,
+                    UserID = userModel.UserId,
+                    IsActive = userModel.IsActive,
+                    Created = DateTime.Now,
+                    CreatedBy = user,
+                    LastUpdated = DateTime.Now,
+                    LastUpdatedBy = user
+                };
 
-            _dbContext.UserRoles.Add(newUserRole);
-            _dbContext.SaveChanges();
+                _dbContext.UserRoles.Add(newUserRole);
+                _dbContext.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _dbContext.Dispose();
+            }
+            
         }
         public void Update(UserRoleModel userModel, string user)
         {
-            UserRole updUserRole = _dbContext.UserRoles.Find(userModel.Id);
-            if (updUserRole == null)
+            try
             {
-                return;
-            }
+                UserRole updUserRole = _dbContext.UserRoles.Find(userModel.Id);
+                if (updUserRole == null)
+                {
+                    return;
+                }
 
-            updUserRole.Id = userModel.Id;
-            updUserRole.RoleID = userModel.RoleId;
-            updUserRole.UserID = userModel.UserId;
-            updUserRole.IsActive = userModel.IsActive;
-            updUserRole.Created = DateTime.Now;
-            updUserRole.CreatedBy = user;
-            updUserRole.LastUpdated = DateTime.Now;
-            updUserRole.LastUpdatedBy = user;
-            _dbContext.SaveChanges();
+                updUserRole.Id = userModel.Id;
+                updUserRole.RoleID = userModel.RoleId;
+                updUserRole.UserID = userModel.UserId;
+                updUserRole.IsActive = userModel.IsActive;
+                updUserRole.Created = DateTime.Now;
+                updUserRole.CreatedBy = user;
+                updUserRole.LastUpdated = DateTime.Now;
+                updUserRole.LastUpdatedBy = user;
+                _dbContext.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _dbContext.Dispose();
+            }
+            
         }
         public void Deactivate(int id, string user)
         {
-            UserRole delUser = _dbContext.UserRoles.FirstOrDefault(p => p.RoleID == id);
-
-            if (delUser == null)
+            try
             {
-                return;
+                UserRole delUser = _dbContext.UserRoles.FirstOrDefault(p => p.RoleID == id);
+
+                if (delUser == null)
+                {
+                    return;
+                }
+
+                delUser.IsActive = false;
+                delUser.LastUpdated = DateTime.Now;
+                delUser.LastUpdatedBy = user;
+                _dbContext.SaveChanges();
             }
-
-            delUser.IsActive = false;
-            delUser.LastUpdated = DateTime.Now;
-            delUser.LastUpdatedBy = user;
-            _dbContext.SaveChanges();
-
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _dbContext.Dispose();
+            }
         }
 
         public void Delete(int id, string user)

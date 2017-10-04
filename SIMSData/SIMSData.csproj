@@ -112,6 +112,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Database\ScreenPrintManagement.bacpac" />
     <None Include="packages.config" />
     <EntityDeploy Include="ScreenPrintManagementEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

@@ -1,0 +1,29 @@
+<div>
+  <app-page-header [heading]="'Administration'" [icon]="'fa-edit'"></app-page-header>
+  <div class="row">
+    <!-- <div class="col-xs-4">
+        <app-lookup-type></app-lookup-type>
+    </div> -->
+    <div class="col-xs-12">
+        <dx-tab-panel
+        #tabPanel
+        [selectedIndex]="0"
+        [loop]="false"
+        [animationEnabled]="true"
+        [swipeEnabled]="true">
+          <dxi-item title="Lookups">
+            <app-lookup></app-lookup>
+          </dxi-item>
+          <dxi-item title='Users'>
+            <app-user></app-user>
+          </dxi-item>
+          <dxi-item title='Roles'>
+            <app-roles (onDataChanged)="notifyRolesUpdate($event)"></app-roles>
+          </dxi-item>
+          <dxi-item title='Permissions'>
+            <app-permissions (onDataChanged)="notifyPermissionsUpdate($event)"></app-permissions>
+          </dxi-item>
+      </dx-tab-panel>
+    </div>
+  </div>
+</div>

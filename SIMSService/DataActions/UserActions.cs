@@ -118,58 +118,96 @@ namespace SIMSService.DataActions
         }
         public void Insert(UserModel userModel, string user)
         {
-            User newUser = new User
+            try
             {
-                Id = userModel.Id,
-                UserName = userModel.UserName,
-                Email = userModel.Email,
-                FirstName = userModel.FirstName,
-                LastName = userModel.LastName,
-                ContactNumber = userModel.ContactNumber,
-                IsActive = userModel.IsActive,
-                Created = DateTime.Now,
-                CreatedBy = user,
-                LastUpdated = DateTime.Now,
-                LastUpdatedBy = user
-            };
+                User newUser = new User
+                {
+                    Id = userModel.Id,
+                    UserName = userModel.UserName,
+                    Email = userModel.Email,
+                    FirstName = userModel.FirstName,
+                    LastName = userModel.LastName,
+                    ContactNumber = userModel.ContactNumber,
+                    IsActive = userModel.IsActive,
+                    Created = DateTime.Now,
+                    CreatedBy = user,
+                    LastUpdated = DateTime.Now,
+                    LastUpdatedBy = user
+                };
 
-            _dbContext.Users.Add(newUser);
-            _dbContext.SaveChanges();
+                _dbContext.Users.Add(newUser);
+                _dbContext.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _dbContext.Dispose();
+            }
+            
         }
         public void Update(UserModel userModel, string user)
         {
-            User updUser = _dbContext.Users.Find(userModel.Id);
-            if (updUser == null)
+            try
             {
-                return;
-            }
+                User updUser = _dbContext.Users.Find(userModel.Id);
+                if (updUser == null)
+                {
+                    return;
+                }
 
-            updUser.Id = userModel.Id;
-            updUser.UserName = userModel.UserName;
-            updUser.Email = userModel.Email;
-            updUser.FirstName = userModel.FirstName;
-            updUser.LastName = userModel.LastName;
-            updUser.ContactNumber = userModel.ContactNumber;
-            updUser.IsActive = userModel.IsActive;
-            updUser.Created = DateTime.Now;
-            updUser.CreatedBy = user;
-            updUser.LastUpdated = DateTime.Now;
-            updUser.LastUpdatedBy = user;
-            _dbContext.SaveChanges();
+                updUser.Id = userModel.Id;
+                updUser.UserName = userModel.UserName;
+                updUser.Email = userModel.Email;
+                updUser.FirstName = userModel.FirstName;
+                updUser.LastName = userModel.LastName;
+                updUser.ContactNumber = userModel.ContactNumber;
+                updUser.IsActive = userModel.IsActive;
+                updUser.Created = DateTime.Now;
+                updUser.CreatedBy = user;
+                updUser.LastUpdated = DateTime.Now;
+                updUser.LastUpdatedBy = user;
+                _dbContext.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _dbContext.Dispose();
+            }
+            
         }
         public void Deactivate(int id, string user)
         {
-            User delUser = _dbContext.Users.Find(id);
-
-            if (delUser == null)
+            try
             {
-                return;
-            }
+                User delUser = _dbContext.Users.Find(id);
 
-            delUser.IsActive = false;
-            delUser.LastUpdated = DateTime.Now;
-            delUser.LastUpdatedBy = user;
-            _dbContext.SaveChanges();
+                if (delUser == null)
+                {
+                    return;
+                }
+
+                delUser.IsActive = false;
+                delUser.LastUpdated = DateTime.Now;
+                delUser.LastUpdatedBy = user;
+                _dbContext.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _dbContext.Dispose();
+            }
 
         }
     }
